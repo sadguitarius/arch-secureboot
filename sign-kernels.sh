@@ -9,6 +9,6 @@ fi
 
 for kernel in $(ls /boot | grep "vmlinuz"); do
     if ! /usr/bin/sbverify --list $kernel 2>/dev/null | /usr/bin/grep -q "signature certificates"; then
-        /usr/bin/sbsign --key /home/sadguitarius/.local/keys/MOK.key --cert /home/sadguitarius/.local/keys/MOK.crt --output $kernel $kernel
+        /usr/bin/sbsign --key $mok_key --cert $mok_crt --output $kernel $kernel
     fi
 done
