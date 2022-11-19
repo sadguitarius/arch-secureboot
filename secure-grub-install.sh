@@ -110,7 +110,9 @@ echo "copying shim and certificate..."
 cp -t ${efi_path} /usr/share/shim-signed/{shim,mm}x64.efi
 cp $mok_cer ${efi_path}
 echo "signing grub..."
-sbsign --key $mok_key --cert $mok_crt --output ${efi_path}grubx64.efi ${efi_path}grubx64.efi
+if ! /usr/bin/sbverify --list ${efi_path}grubx64.efi | /usr/bin/grep -q "signature certificates"; then
+    sbsign --key $mok_key --cert $mok_crt --output ${efi_path}grubx64.efi ${efi_path}grubx64.efi;
+fi
 # update boot to use shim
 echo "adding secure boot entry..."
 efibootmgr --create --disk $(findmnt $esp -o SOURCE | grep "/dev") --loader "/EFI/$bootloader_id/shimx64.efi" --label "$bootloader_id (Secure Boot)"
