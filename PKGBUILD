@@ -7,8 +7,7 @@ url="git@github.com:sadguitarius/arch-secureboot.git/tree/fix-duplicate-signatur
 pkgdesc="A set of helper scripts for secure boot with Grub2 and Shim"
 license=("MIT")
 depends=("openssl" "grub" "shim-signed" "sbsigntools" "efibootmgr")
-# source=("$_pkgname::git+https://github.com/sadguitarius/arch-secureboot#branch=fix-duplicate-signatures")
-source=("$_pkgname::/home/sadguitarius/dev/source/arch-secureboot/")
+source=("$_pkgname::git+https://github.com/sadguitarius/arch-secureboot#branch=fix-duplicate-signatures")
 sha256sums=("SKIP")
 install=".install"
 
